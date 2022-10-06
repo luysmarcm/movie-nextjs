@@ -1,32 +1,23 @@
 import Image from 'next/image';
+import { useState } from 'react';
+import Modal from '../Modal';
 
 const myLoader = ({ src }) => {
 	return `${src}`;
 };
 
-const convertBreadcrumb = (string) => {
-	const split = string.split("?", 2);
-
-	return split[0]
-		.replace(/-/g, " ")
-		.replace(/oe/g, "ö")
-		.replace(/ae/g, "ä")
-		.replace(/ue/g, "ü")
-		.replace("/", "")
-		.replace("/?", "")
-};
-
-
 const InfoMovie = ({data}) => {
 
-	console.log(data.images.backdrops[0].file_path);
+		const [showModal, setshowModal] = useState(false);
+
+	
   return (
 		<div
-			className="movie-info border-b border-gray-800"
+			className="movie-info border-b border-primary"
 			// style={{
 			// 	backgroundImage: `url(https://image.tmdb.org/t/p/w500${data.images.backdrops[6].file_path})`,
 			// 	backgroundSize: "cover" , width:"100%", height:"100%", BackgroundPosition: "center",
-  			// 	BackgroundRepeat: "no-repeat",  Filter: "blur(8px)",
+			// 	BackgroundRepeat: "no-repeat",  Filter: "blur(8px)",
 			// }}
 		>
 			<div className="container mx-auto px-4 py-16 flex flex-col md:flex-row">
@@ -46,7 +37,7 @@ const InfoMovie = ({data}) => {
 					<h2 className="text-4xl mt-4 md:mt-0 mb-2 font-semibold">
 						{data.title}
 					</h2>
-					<div className="flex flex-wrap items-center text-gray-400 text-sm">
+					<div className="flex flex-wrap items-center text-sm">
 						<svg className="fill-current text-primary w-4" viewBox="0 0 24 24">
 							<g data-name="Layer 2">
 								<path
@@ -60,11 +51,13 @@ const InfoMovie = ({data}) => {
 						<span>{data.release_date}</span>
 						<span className="mx-2">|</span>
 						{data.genres.map((g, i) => (
-							<span key={i}>{convertBreadcrumb(g.name)} </span>
+							<div key={i}>
+								<div>{g.name}</div>
+							</div>
 						))}
 					</div>
 
-					<p className="text-gray-300 mt-8">{data.overview}</p>
+					<p className="mt-8 text-xl">{data.overview}</p>
 
 					<div className="mt-12">
 						<h4 className="text-white font-semibold">Featured Crew</h4>
@@ -76,6 +69,20 @@ const InfoMovie = ({data}) => {
 								</div>
 							))}
 						</div>
+					</div>
+					<div className="mt-12">
+						<button
+							type="button"
+							className="border-2 rounded-lg p-2 w-28 lg:w-40 font-quick bg-secundary font-bold text-white hover:bg-primary hover:text-fondo"
+							onClick={() => setshowModal(true)}
+						>
+							Ver Trailer
+						</button>
+						<Modal
+							movie={data}
+							showModal={showModal}
+							setshowModal={setshowModal}
+						/>
 					</div>
 				</div>
 			</div>

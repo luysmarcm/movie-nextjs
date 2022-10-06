@@ -35,21 +35,28 @@ const NavBar = () => {
 	const showSideMenu = () => {
 		setisSideMenuOpen(!isSideMenuOpen);
 	};
+
+	const [isSideMenuOpenD, setisSideMenuOpenD] = useState(false);
+
+	const showSideMenuD = () => {
+		setisSideMenuOpenD(!isSideMenuOpenD);
+	};
+
 	return (
 		<nav className="bg-black px-8 py-4 flex items-center justify-between w-full">
 			<div className="relative flex items-center justify-between w-full">
 				<Link href="/" passHref>
-					<div style={{ width: "200px" }}>
+					<div style={{ width: "210px" }}>
 						<Image
-							src="/image/next-movies2.png"
+							src="/image/nm_logo.png"
 							alt="Logo"
-							width="781"
+							width="710"
 							height="84"
 						/>
 					</div>
 				</Link>
 				<div className="hidden lg:flex lg:flex-row space-x-4">
-					{links.map((item) => (
+					{/* {links.map((item) => (
 						<a
 							key={item.title}
 							href={item.path}
@@ -57,7 +64,112 @@ const NavBar = () => {
 						>
 							{item.title}
 						</a>
-					))}
+					))} */}
+
+					<Link href="/">
+						<a className="px-3 py-2 rounded-md text-md lg:text-xl text-white hover:text-primary">
+							Home
+						</a>
+					</Link>
+					{/* <Link
+						href="/"
+						className="px-3 py-2 rounded-md text-md lg:text-lg text-white hover:text-primary"
+					></Link> */}
+
+					<button
+						aria-label="Abrir menu"
+						onClick={() => {
+							showSideMenu();
+						}}
+						className="lg:w-full text-sm  text-center inline-flex items-center relative"
+					>
+						<a className="px-3 py-2 rounded-md text-md lg:text-xl text-white hover:text-primary">
+							Movies
+						</a>
+						<svg
+							className="w-4 h-4 ml-2"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M19 9l-7 7-7-7"
+							/>
+						</svg>
+					</button>
+
+					<div
+						className={`transition-all duration-500 absolute  bg-black  overflow-hidden z-10 translate-y-10  ${
+							isSideMenuOpen ? "h-auto" : "h-0"
+						}`}
+					>
+						<ul className="flex flex-col p-10 px-10 rounded-lg text-2xl space-y-3">
+							<li>
+								<Link href="/movies/now-playing" passHref>
+									<a className="block text-base hover:text-primary">
+										Now playing
+									</a>
+								</Link>
+								<Link href="/movies/upcoming" passHref>
+									<a className="block text-base hover:text-primary">Upcoming</a>
+								</Link>
+							</li>
+						</ul>
+					</div>
+					<>
+						<button
+							aria-label="Abrir menu"
+							onClick={() => {
+								showSideMenu();
+							}}
+							className="lg:w-full text-sm  text-center inline-flex items-center relative"
+						>
+							<a className="px-3 py-2 rounded-md text-md lg:text-xl text-white hover:text-primary">
+								Tv
+							</a>
+							<svg
+								className="w-4 h-4 ml-2"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth={2}
+									d="M19 9l-7 7-7-7"
+								/>
+							</svg>
+						</button>
+
+						<div
+							className={`transition-all duration-500 absolute  bg-black  overflow-hidden z-10 translate-y-10  ${
+								isSideMenuOpen ? "h-auto" : "h-0"
+							}`}
+						>
+							<ul className="flex flex-col p-10 px-10 rounded-lg text-2xl space-y-3">
+								<li>
+									<Link href="/tv/on_the_air" passHref>
+										<a className="block text-base hover:text-primary">
+											On the air
+										</a>
+									</Link>
+								</li>
+								<li>
+									<Link href="/tv/top-tv-show" passHref>
+										<a className="block text-base hover:text-primary">
+											Top tv show
+										</a>
+									</Link>
+								</li>
+							</ul>
+						</div>
+					</>
 				</div>
 				<button
 					aria-label="Abrir menu"

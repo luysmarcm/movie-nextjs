@@ -1,11 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
+import { useState } from "react";
+import Modal from "../Modal";
 
 const myLoader = ({ src }) => {
 	return `${src}`;
 };
 const InfoTv = ({data}) => {
+	const [showModal, setshowModal] = useState(false);
   return (
-		<div className="tv-info border-b border-gray-800">
+		<div className="tv-info border-b border-primary">
 			<div className="container mx-auto px-4 py-16 flex flex-col md:flex-row">
 				<div className="flex-none  w-96">
 					<Image
@@ -38,13 +42,11 @@ const InfoTv = ({data}) => {
 						<span className="mx-2">|</span>
 						<span className="mx-2">|</span>
 						{data.data.genres.map((g, i) => (
-							<span key={i}>
-								{g.name} {""}
-							</span>
+							<span key={i}>{g.name} |</span>
 						))}
 					</div>
 
-					<p className="text-gray-300 mt-8">{data.data.overview}</p>
+					<p className="text-xl mt-8">{data.data.overview}</p>
 
 					<div className="mt-12">
 						<h4 className="text-white font-semibold">Featured Crew</h4>
@@ -57,7 +59,7 @@ const InfoTv = ({data}) => {
 							))}
 						</div>
 					</div>
-					<div className="mt-12">
+					{/* <div className="mt-12">
 						<h4 className="text-white font-semibold">Temporadas</h4>
 						<span>{data.data.number_of_seasons}</span>
 						<h4 className="text-white font-semibold">Numero de Capitulos</h4>
@@ -76,6 +78,57 @@ const InfoTv = ({data}) => {
 								/>
 							</div>
 						))}
+					</div> */}
+					<div className="mt-12">
+						<table>
+							<thead>
+								<tr>
+									<th>Network</th>
+									<th>Seasons</th>
+									<th>Episodes</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										{data.data.networks.map((n, i) => (
+											<div
+												className="flex-none"
+												key={i}
+												style={{ width: "100px" }}
+											>
+												<img
+													loader={myLoader}
+													src={`https://image.tmdb.org/t/p/original/${n.logo_path}`}
+													alt={data.name}
+													// className="movie-poster w-64 lg:w-96"
+													width={500}
+													height={133}
+													// layout="fill"
+													unoptimized
+												/>
+											</div>
+										))}
+									</td>
+									<td>{data.data.number_of_seasons}</td>
+									<td>{data.data.number_of_episodes}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div className="mt-12">
+						<button
+							type="button"
+							className="border-2 rounded-lg p-2 w-28 lg:w-40 font-quick bg-secundary font-bold text-white hover:bg-primary hover:text-fondo"
+							onClick={() => setshowModal(true)}
+						>
+							Ver Trailer
+						</button>
+						<Modal
+							movie={data.data}
+							showModal={showModal}
+							setshowModal={setshowModal}
+						/>
 					</div>
 				</div>
 			</div>

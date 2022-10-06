@@ -3,17 +3,18 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-		<footer>
-			<div className="container mx-auto text-sm px-4 py-6">
+		<footer className="bg-black">
+			<div className="container text-white mx-auto text-sm px-4 py-6 hover:text-primary">
 				Powered by{" "}
 				<Link
 					href="https://www.themoviedb.org/documentation/api"
 					target="_blank"
-					className="underline hover:text-gray-300"
+					className="underline "
 				>
 					TMDb API
 				</Link>
 			</div>
+			
 		</footer>
 	);
 }

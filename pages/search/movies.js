@@ -56,12 +56,10 @@ const Movies = () => {
 	}, [buscar]);
 
 	if (movies.length === 0) return null;
-	console.log(router.pathname);
-
 	return (
 		<Layout>
 			<div className="container mx-auto px-4 pt-16 mb-16 flex flex-col-2">
-				<ListSearch movies={movies} tv={tv} />
+				{/* <ListSearch movies={movies} tv={tv} /> */}
 				<div className="flex-1 w-full">
 					<FormularioSearch setBuscar={setBuscar} />
 					<ResultsSearch movies={movies} tv={tv} pathname={router.pathname} />

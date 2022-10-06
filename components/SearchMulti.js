@@ -9,7 +9,7 @@ const SearchMulti = () => {
 	 const handleClick = (e) => {
 			e.preventDefault();
 			router.push({
-				pathname: "/search/movies",
+				pathname: "/search",
 				query: {query}
 			});
 		};

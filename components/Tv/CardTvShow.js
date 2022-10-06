@@ -9,16 +9,18 @@ const CardTvShow = ({show}) => {
   return (
 		<div className="mt-8">
 			<Link passHref href={`/tv/${show.id}`}>
-				<Image
-					loader={myLoader}
-					src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
-					alt={`${show.name} Poster`}
-					className="thumbnail hover:opacity-75 transition ease-in-out duration-150 rounded-xl"
-					id={`movie-poster-${show.id}`}
-					width={500}
-					height={750}
-					unoptimized
-				/>
+				<a>
+					<Image
+						loader={myLoader}
+						src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
+						alt={`${show.name} Poster`}
+						className="thumbnail hover:opacity-75 transition ease-in-out duration-150 rounded-xl"
+						id={`movie-poster-${show.id}`}
+						width={500}
+						height={750}
+						unoptimized
+					/>
+				</a>
 			</Link>
 			<div className="mt-2">
 				<Link href={`/tv/${show.id}`} passHref>

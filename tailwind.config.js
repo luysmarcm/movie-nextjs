@@ -28,7 +28,7 @@ module.exports = {
 				// pshoot: ["Photoshoot"],
 			},
 			backgroundImage: (theme) => ({
-				heading: "url('/imagen/new-heading.png')",
+				heading: "url('/image/banner2.png')",
 				fondo: "url('/image/banner2.png')",
 			}),
 			maxWidth: {
@@ -51,5 +51,5 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require("@tailwindcss/aspect-ratio")],
 };

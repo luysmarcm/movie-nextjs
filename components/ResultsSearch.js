@@ -9,17 +9,39 @@ const ResultsSearch = ({ movies, tv, pathname}) => {
 					Results
 				</h2>
 				{pathname === "/search/movies" ? (
-					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-						{movies.results.map((movie) => (
-							<CardMovies movie={movie} key={movie.id} />
-						))}
-					</div>
+					<>
+						{movies.results && movies.results.length === 0 && (
+							<div className="block md:col-start-2 md:col-span-2 lg:col-end-7 w-full items-center mb-11 p-20">
+								<div className="text-3xl z-30 text centertext-black text-center space-y-3 ">
+									<p className="text-center">
+										No se ha encontrado una coincidencia
+									</p>
+								</div>
+							</div>
+						)}
+						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+							{movies.results.map((movie) => (
+								<CardMovies movie={movie} key={movie.id} />
+							))}
+						</div>
+					</>
 				) : (
-					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-						{tv.results.map((show) => (
-							<CardTvShow show={show} key={show.id} />
-						))}
-					</div>
+					<>
+						{tv.results && tv.results.length === 0 && (
+							<div className="block md:col-start-2 md:col-span-2 lg:col-end-7 w-full items-center mb-11 p-20">
+								<div className="text-3xl z-30 text centertext-black text-center space-y-3 ">
+									<p className="text-center">
+										No se ha encontrado una coincidencia
+									</p>
+								</div>
+							</div>
+						)}
+						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+							{tv.results.map((show) => (
+								<CardTvShow show={show} key={show.id} />
+							))}
+						</div>
+					</>
 				)}
 			</div>
 		</div>

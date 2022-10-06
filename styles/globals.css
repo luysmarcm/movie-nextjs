@@ -6,8 +6,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 a {
@@ -30,3 +29,85 @@ a {
 }
 
 
+table{
+  /* border: 2px solid #9959e5; */
+  width: 50%;
+	/* height: 300px; */
+}
+
+tbody {
+  /* border: 2px solid #9959e5;
+  border-bottom: 2px solid #9959e5; */
+  color: white;
+}
+
+th {
+  /* border-bottom: 2px solid #9959e5;
+  border-right: 2px solid #9959e5; */
+  /* padding: 0px 20px; */
+  text-align: start;
+  /* text-transform: uppercase; */
+  font-weight: bold;
+  font-size: medium;
+  
+}
+
+tr{
+  text-align: start;
+}
+td {
+  /* border-right: 2px solid #9959e5; */
+  padding: 2px 4px;
+  /* border-bottom: 2px solid #9959e5; */
+  font-size: medium;
+}
+
+td:last-child {
+  border-right: 0;
+}
+
+tfoot {
+  color: white;
+}
+
+tfoot th {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    display: inline-block;
+  }
+}
+
+
+.navbar {
+  overflow: hidden;
+}
+
+.navbar a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.subnav {
+  float: left;
+  overflow: hidden;
+}
+
+
+.subnav-content {
+  display: none;
+  position: absolute;
+  /* background-color: #f1f1f1; */
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 4;
+}
+
+.subnav:hover .subnav-content {
+  display: block;
+}

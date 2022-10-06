@@ -32,9 +32,14 @@ const Movie = ({data}) => {
 export default Movie;
 
 export async function getStaticPaths() {
-	const { data } = await axios(
-		`https://api.themoviedb.org/3/movie/popular?api_key=95c2cfdbd851e073389c50c5edf078d9&language=es-ES&page=1`
+	// const { data } = await axios(
+	// 	`https://api.themoviedb.org/3/movie/popular?api_key=95c2cfdbd851e073389c50c5edf078d9&language=es-ES&page=1`
+	// );
+	const res = await fetch(
+		"https://api.themoviedb.org/3/movie/popular?api_key=95c2cfdbd851e073389c50c5edf078d9&page=1"
 	);
+	const data = await res.json();
+
 	const paths = data.results.map((m, id) => ({
 		params: { id: m.id.toString() },
 	}));
@@ -42,9 +47,14 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-   const { data } = await axios(
-			`https://api.themoviedb.org/3/movie/${params.id}?append_to_response=credits,videos,images&api_key=95c2cfdbd851e073389c50c5edf078d9`
-		);
+//    const { data } = await axios(
+// 			`https://api.themoviedb.org/3/movie/${params.id}?append_to_response=credits,videos,images&api_key=95c2cfdbd851e073389c50c5edf078d9`
+// 		);
+
+	const res = await fetch(
+		`https://api.themoviedb.org/3/movie/${params.id}?append_to_response=credits,videos,images&api_key=95c2cfdbd851e073389c50c5edf078d9`
+	);
+	const data = await res.json();
 
 	return {
 		props: {

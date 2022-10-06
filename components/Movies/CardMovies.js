@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link';
+import Tv from '../../pages/tv';
 
 const myLoader = ({ src }) => {
 	return `${src}`;
@@ -23,7 +24,7 @@ const CardMovies = ({ movie }) => {
 			</Link>
 			<div className="mt-2">
 				<Link passHref href={`/movies/${movie.id}`}>
-					<a className="text-lg mt-2 hover:text-gray-300">{movie.title}</a>
+					<a className="text-lg mt-2 hover:text-gray-300">{movie.title} {movie.name}</a>
 				</Link>
 				<div className="flex items-center text-gray-400 text-sm mt-1">
 					<svg className="fill-current text-primary w-4" viewBox="0 0 24 24">

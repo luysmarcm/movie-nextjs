@@ -8,7 +8,7 @@ const PopularPeople = ({ popularPeople }) => {
 					Popular People
 				</h2>
 				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-					{popularPeople.results.map((p, i) => (
+					{popularPeople.map((p, i) => (
 						<CardPeople person={p} key={i} />
 					))}
 				</div>

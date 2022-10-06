@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import SeoComponent from '../components/SeoComponent';
-import SearchMenu from '../components/SearchMenu';
 import GridLoading from '../components/Loading/GridLoading';
 import HeadingPage from '../components/HeadingPage';
 import LoadMore from '../components/LoadMore';
 import CardMovies from '../components/Movies/CardMovies';
+import SearchMenu from '../components/SearchMenu';
 
 const API_URL = "https://api.themoviedb.org/3/";
 const API_KEY = "b4a549abb798b19dbb7e63335d135053";

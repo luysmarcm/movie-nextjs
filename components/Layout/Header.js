@@ -1,11 +1,9 @@
-import NavBar from './NavBar'
-import SideBar from './SideBar'
+import SideBar from "./SideBar";
 
 const Header = () => {
   return (
 		<header>
-			{/* <NavBar/> */}
-			  <SideBar />
+			<SideBar />
 		</header>
 	);
 }

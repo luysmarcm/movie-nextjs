@@ -123,14 +123,3 @@ const People = ({data}) => {
 }
 
 export default People
-
-// export async function getStaticProps() {
-// 	const { data } = await axios(
-// 		`https://api.themoviedb.org/3/person/popular?api_key=95c2cfdbd851e073389c50c5edf078d9&language=en-US`
-// 	);
-// 	return {
-// 		props: {
-// 			data,
-// 		},
-// 	};
-// }

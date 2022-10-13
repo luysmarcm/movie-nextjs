@@ -2,19 +2,27 @@
 import Image from "next/image";
 import { useState } from "react";
 import Modal from "../Modal"
+import TabsTvInfo from "./TabsTvInfo";
 
 const myLoader = ({ src }) => {
 	return `${src}`;
 };
-const InfoTv = ({data}) => {
+const InfoTv = ({ data, recommendations }) => {
 	const [showModal, setshowModal] = useState(false);
-  return (
-		<div className="tv-info border-b border-primary">
-			<div className="container mx-auto px-4 py-16 flex flex-col md:flex-row">
+	return (
+		<div
+			className="tv-info border-b border-primary  "
+			style={{
+				backgroundImage: `url(https://image.tmdb.org/t/p/w500${data.images.backdrops[0].file_path})`,
+				backgroundSize: "cover",
+				BackgroundPosition: "center",
+			}}
+		>
+			<div className="container mx-auto px-4 py-16 flex flex-col md:flex-row container1 w-full">
 				<div className="flex-none  w-96">
 					<Image
 						loader={myLoader}
-						src={`https://image.tmdb.org/t/p/w500${data.data.poster_path}`}
+						src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
 						alt={data.name}
 						className="movie-poster w-64 lg:w-96 rounded-xl"
 						id="tv-poster"
@@ -22,11 +30,23 @@ const InfoTv = ({data}) => {
 						height={750}
 						unoptimized
 					/>
+					<div className="mt-12">
+						<button
+							type="button"
+							className="border-2 rounded-lg p-2 w-28 lg:w-full font-quick bg-secundary font-bold text-white hover:bg-primary hover:text-fondo"
+							onClick={() => setshowModal(true)}
+						>
+							Ver Trailer
+						</button>
+						<Modal
+							movie={data}
+							showModal={showModal}
+							setshowModal={setshowModal}
+						/>
+					</div>
 				</div>
 				<div className="md:ml-24">
-					<h2 className="text-4xl mt-4 md:mt-0 font-semibold">
-						{data.data.name}
-					</h2>
+					<h2 className="text-4xl mt-4 md:mt-0 font-semibold">{data.name}</h2>
 					<div className="flex flex-wrap items-center text-gray-400 text-sm">
 						<svg className="fill-current text-primary w-4" viewBox="0 0 24 24">
 							<g data-name="Layer 2">
@@ -36,49 +56,17 @@ const InfoTv = ({data}) => {
 								/>
 							</g>
 						</svg>
-						<span className="ml-1">{data.data.vote_average}</span>
+						<span className="ml-1">{data.vote_average}</span>
 						<span className="mx-2">|</span>
-						<span>{data.data.first_air_date}</span>
+						<span>{data.first_air_date}</span>
 						<span className="mx-2">|</span>
-						<span className="mx-2">|</span>
-						{data.data.genres.map((g, i) => (
-							<span key={i}>{g.name} |</span>
+						{data.genres.map((g, i) => (
+							<span key={i}>{g.name} &nbsp;</span>
 						))}
 					</div>
 
-					<p className="text-xl mt-8">{data.data.overview}</p>
+					<p className="text-xl mt-8">{data.overview}</p>
 
-					<div className="mt-12">
-						<h4 className="text-white font-semibold">Featured Crew</h4>
-						<div className="flex mt-4">
-							{data.data.credits.crew.slice(0, 3).map((crew, i) => (
-								<div className="mr-8" key={i}>
-									<div>{crew.name}</div>
-									<div className="text-gray-400 text-sm">{crew.job}</div>
-								</div>
-							))}
-						</div>
-					</div>
-					{/* <div className="mt-12">
-						<h4 className="text-white font-semibold">Temporadas</h4>
-						<span>{data.data.number_of_seasons}</span>
-						<h4 className="text-white font-semibold">Numero de Capitulos</h4>
-						<span>{data.data.number_of_episodes}</span>
-						<h4 className="text-white font-semibold">Network</h4>
-						{data.data.networks.map((n, i) => (
-							<div className="flex-none  w-20" key={i}>
-								<Image
-									loader={myLoader}
-									src={`https://image.tmdb.org/t/p/w500${n.logo_path}`}
-									alt={data.name}
-									className="movie-poster w-64 lg:w-96"
-									width={500}
-									height={133}
-									unoptimized
-								/>
-							</div>
-						))}
-					</div> */}
 					<div className="mt-12">
 						<table>
 							<thead>
@@ -91,49 +79,35 @@ const InfoTv = ({data}) => {
 							<tbody>
 								<tr>
 									<td>
-										{data.data.networks.map((n, i) => (
+										{data.networks.map((n, i) => (
 											<div
 												className="flex-none"
 												key={i}
 												style={{ width: "100px" }}
 											>
 												<img
-													loader={myLoader}
 													src={`https://image.tmdb.org/t/p/original/${n.logo_path}`}
 													alt={data.name}
-													// className="movie-poster w-64 lg:w-96"
+													// className="text-white"
 													width={500}
 													height={133}
-													// layout="fill"
-													unoptimized
 												/>
 											</div>
 										))}
 									</td>
-									<td>{data.data.number_of_seasons}</td>
-									<td>{data.data.number_of_episodes}</td>
+									<td>{data.number_of_seasons}</td>
+									<td>{data.number_of_episodes}</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 					<div className="mt-12">
-						<button
-							type="button"
-							className="border-2 rounded-lg p-2 w-28 lg:w-40 font-quick bg-secundary font-bold text-white hover:bg-primary hover:text-fondo"
-							onClick={() => setshowModal(true)}
-						>
-							Ver Trailer
-						</button>
-						<Modal
-							movie={data.data}
-							showModal={showModal}
-							setshowModal={setshowModal}
-						/>
+						<TabsTvInfo data={data} recommendations={recommendations} />
 					</div>
 				</div>
 			</div>
 		</div>
 	);
-}
+};
 
 export default InfoTv;

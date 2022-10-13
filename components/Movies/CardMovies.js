@@ -11,20 +11,38 @@ const CardMovies = ({ movie }) => {
 	return (
 		<div className="mt-8">
 			<Link passHref href={`/movies/${movie.id}`}>
-				<Image
-					loader={myLoader}
-					src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-					alt={`${movie.title} Poster`}
-					className="thumbnail hover:opacity-75 transition ease-in-out duration-150 rounded-xl"
-					id={`movie-poster-${movie.id}`}
-					width={500}
-					height={750}
-					unoptimized
-				/>
+				{movie.poster_path === null ? (
+					<a>
+						<Image
+							src="/imagen/fondoimagen.png"
+							alt={`${movie.title} Poster`}
+							className="thumbnail hover:opacity-75 transition ease-in-out duration-150 rounded-xl"
+							id={`movie-poster-${movie.id}`}
+							width={500}
+							height={750}
+							unoptimized
+						/>
+					</a>
+				) : (
+					<a>
+						<Image
+							loader={myLoader}
+							src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+							alt={`${movie.title} Poster`}
+							className="thumbnail hover:opacity-75 transition ease-in-out duration-150 rounded-xl"
+							id={`movie-poster-${movie.id}`}
+							width={500}
+							height={750}
+							unoptimized
+						/>
+					</a>
+				)}
 			</Link>
 			<div className="mt-2">
 				<Link passHref href={`/movies/${movie.id}`}>
-					<a className="text-lg mt-2 hover:text-gray-300">{movie.title} {movie.name}</a>
+					<a className="text-lg mt-2 hover:text-gray-300">
+						{movie.title} {movie.name}
+					</a>
 				</Link>
 				<div className="flex items-center text-gray-400 text-sm mt-1">
 					<svg className="fill-current text-primary w-4" viewBox="0 0 24 24">

@@ -1,27 +1,26 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import Modal from '../Modal';
+import TabInfo from './TabInfo';
 
 const myLoader = ({ src }) => {
 	return `${src}`;
 };
 
-const InfoMovie = ({data}) => {
-
-		const [showModal, setshowModal] = useState(false);
-
-	
-  return (
+const InfoMovie = ({ data, recommendations }) => {
+	const [showModal, setshowModal] = useState(false);
+	return (
 		<div
 			className="movie-info border-b border-primary"
-			// style={{
-			// 	backgroundImage: `url(https://image.tmdb.org/t/p/w500${data.images.backdrops[6].file_path})`,
-			// 	backgroundSize: "cover" , width:"100%", height:"100%", BackgroundPosition: "center",
-			// 	BackgroundRepeat: "no-repeat",  Filter: "blur(8px)",
-			// }}
+			style={{
+				backgroundImage: `url(https://image.tmdb.org/t/p/w500${data.images.backdrops[0].file_path})`,
+				backgroundSize: "cover",
+				BackgroundPosition: "center",
+				
+			}}
 		>
-			<div className="container mx-auto px-4 py-16 flex flex-col md:flex-row">
-				<div className="flex-none w-96">
+			<div className="container mx-auto px-4 py-16 flex flex-col md:flex-row container1">
+				<div className="flex-none lg:w-96">
 					<Image
 						loader={myLoader}
 						src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
@@ -32,6 +31,20 @@ const InfoMovie = ({data}) => {
 						height={750}
 						unoptimized
 					/>
+					<div className="mt-12">
+						<button
+							type="button"
+							className="border-2 rounded-lg p-2 w-28 lg:w-full font-quick bg-secundary font-bold text-white hover:bg-primary hover:text-fondo"
+							onClick={() => setshowModal(true)}
+						>
+							Ver Trailer
+						</button>
+						<Modal
+							movie={data}
+							showModal={showModal}
+							setshowModal={setshowModal}
+						/>
+					</div>
 				</div>
 				<div className="md:ml-24">
 					<h2 className="text-4xl mt-4 md:mt-0 mb-2 font-semibold">
@@ -52,42 +65,18 @@ const InfoMovie = ({data}) => {
 						<span className="mx-2">|</span>
 						{data.genres.map((g, i) => (
 							<div key={i}>
-								<div>{g.name}</div>
+								<div>{g.name} &nbsp;</div>
 							</div>
 						))}
 					</div>
-
 					<p className="mt-8 text-xl">{data.overview}</p>
-
 					<div className="mt-12">
-						<h4 className="text-white font-semibold">Featured Crew</h4>
-						<div className="flex mt-4">
-							{data.credits.crew.slice(0, 3).map((crew, i) => (
-								<div className="mr-8" key={i}>
-									<div>{crew.name}</div>
-									<div className="text-gray-400 text-sm">{crew.job}</div>
-								</div>
-							))}
-						</div>
-					</div>
-					<div className="mt-12">
-						<button
-							type="button"
-							className="border-2 rounded-lg p-2 w-28 lg:w-40 font-quick bg-secundary font-bold text-white hover:bg-primary hover:text-fondo"
-							onClick={() => setshowModal(true)}
-						>
-							Ver Trailer
-						</button>
-						<Modal
-							movie={data}
-							showModal={showModal}
-							setshowModal={setshowModal}
-						/>
+						<TabInfo data={data} recommendations={recommendations} />
 					</div>
 				</div>
 			</div>
 		</div>
 	);
-}
+};
 
 export default InfoMovie

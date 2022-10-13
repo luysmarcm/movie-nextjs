@@ -6,12 +6,12 @@ import InfoMovie from '../../components/Movies/InfoMovie';
 import CastMovie from '../../components/Movies/CastMovie';
 import SeoComponent from "../../components/SeoComponent";
 
-const Movie = ({data}) => {
+const Movie = ({ data, recommendations }) => {
 	const router = useRouter();
 	if (router.isFallback) {
 		return null;
 	}
-  return (
+	return (
 		<Layout>
 			<SeoComponent
 				title={`movies Next.js | ${data.title}`}
@@ -20,14 +20,14 @@ const Movie = ({data}) => {
 			/>
 			{router.isFallback ? null : (
 				<>
-					<InfoMovie data={data} />
-					<CastMovie data={data} />
+					<InfoMovie data={data} recommendations={recommendations} />
+					{/* <CastMovie data={data} /> */}
 					<GalleryMovie data={data} />
 				</>
 			)}
 		</Layout>
 	);
-}
+};
 
 export default Movie;
 
@@ -56,9 +56,15 @@ export async function getStaticProps({ params }) {
 	);
 	const data = await res.json();
 
+	const resp = await fetch(
+		`https://api.themoviedb.org/3/movie/${params.id}/recommendations?api_key=95c2cfdbd851e073389c50c5edf078d9&language=en-US&page=1`
+	);
+	const recommendations = await resp.json();
+
 	return {
 		props: {
 			data,
+			recommendations,
 		},
 	};
 }

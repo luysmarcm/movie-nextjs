@@ -56,7 +56,7 @@ const Tv = () => {
 				if (!json?.results) {
 					throw new Error(json?.statusMessage ?? "Error");
 				}
-				console.log(json);
+				// console.log(json);
 				// replace state on page 1 of a new search
 				// otherwise append to exisiting
 				settvShow((previous) =>

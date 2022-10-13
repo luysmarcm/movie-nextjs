@@ -34,7 +34,7 @@ const Credits = ({ data }) => {
 									<a className="hover:underline">{credit.title}</a>
 								</Link>
 							</strong>
-							as {credit.character}
+							&nbsp; as {credit.character}
 						</li>
 					))}
 				</ul>

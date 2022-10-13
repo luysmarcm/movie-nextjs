@@ -3,6 +3,8 @@ import Layout from '../components/Layout';
 import axios from 'axios';
 import CardMovies from '../components/Movies/CardMovies';
 import SeoComponent from '../components/SeoComponent';
+import HeadingPage from '../components/HeadingPage';
+import Carroussel from '../components/CarouselCard/Carroussel';
 
 const DcUniverse = ({data}) => {
   return (
@@ -12,18 +14,17 @@ const DcUniverse = ({data}) => {
 				description={data.description}
 				image="/images/imagen.png"
 			/>
+
+			<HeadingPage titulo="DC Comic Universe" />
+			<Carroussel data={data.results} />
 			<div className="container mx-auto px-4 pt-16 mb-16">
 				<div className="popular-movies">
-					<h2 className="uppercase tracking-wider text-orange-500 text-lg font-semibold">
-						DC COMIC UNIVERSE
-					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
 						{data.results.map((movie, i) => (
 							<CardMovies movie={movie} key={i} />
 						))}
 					</div>
 				</div>
-				<button> MOSTAR MAS</button>
 			</div>
 		</Layout>
 	);

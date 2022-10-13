@@ -8,12 +8,10 @@ const Modal = ({ showModal, setshowModal, movie }) => {
 						<div className="border-2 rounded-lg shadow-lg relative flex flex-col w-full bg-black outline-none focus:outline-none justify-center border-white">
 							<div className="p-20">
 								<div>
-									<div
-									class="aspect-w-16 aspect-h-9"
-									>
+									<div class="aspect-w-16 aspect-h-9">
 										<iframe
 											className=""
-											src={`https://www.youtube.com/embed/${movie.videos.results[0].key}`}    
+											src={`https://www.youtube.com/embed/${movie.videos.results[0].key}`}
 											frameborder="0"
 											allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 											allowfullscreen

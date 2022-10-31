@@ -27,7 +27,7 @@ const Banner = ({ encartelera }) => {
 		breakpoints: {
 			"(min-width: 150px)": {
 				slides: {
-					perView: 3,
+					perView: 2,
 					// spacing: 5,
 				},
 			},
